@@ -9,7 +9,13 @@ const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+    origin: ["https://deploy-mern-1whq.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+    }
+));
 
 // Database conection mongoDB
 mongoose.connect("mongodb+srv://bruno:mongodb101@spa.9bxm8zz.mongodb.net/spa");
