@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import './CSS/LoginSingUp.css'
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const LoginSingUp = () => {
     const [state, setState] = useState("Login");
+    const [agreeTerms, setAgreeTerms] = useState(false);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -10,12 +12,20 @@ const LoginSingUp = () => {
         email: ""
     });
 
+    const toggleTerms = () => {
+        setAgreeTerms(!agreeTerms);
+      };
+
     const changeHandler = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const login = async () => {
         try {
+            if (!agreeTerms) {
+               toast.error("Please accept terms of use and privacy policy");
+               return;
+              }
             let response = await fetch('http://localhost:4000/login', {  
                 method: 'POST',
                 headers: {
@@ -46,6 +56,10 @@ const LoginSingUp = () => {
 
     const signUp = async () => {
         try {
+            if (!agreeTerms) {
+                toast.error("Please accept terms of use and privacy policy");
+                return;
+               }
             let response = await fetch('http://localhost:4000/signup', {
                 method: 'POST',
                 headers: {
@@ -87,8 +101,12 @@ const LoginSingUp = () => {
                 {state === "Sign Up" ? <p className="loginsingup-login">Already have an Account? <span onClick={() => { setState("Login") }}>Login Here</span></p> : null}
                 {state === "Login" ? <p className="loginsingup-login">Create an Account?<span onClick={() => { setState("Sign Up") }}> Click Here</span></p> : null}
                 <div className="loginsingup-agree">
-                    <input type="checkbox" name="" id="" />
-                    <p>By Continuing, I Agree to the terms of use & privacy policy.</p>
+                    <input type="checkbox"             
+            name="agreeTerms"
+            id="agreeTerms"
+            checked={agreeTerms}
+            onChange={toggleTerms} />
+                    <p>By Continuing, I Agree to the <a href="/unknown">terms of use</a> & <a href="/unknown">privacy policy</a>.</p>
                 </div>
             </div>
         </div>

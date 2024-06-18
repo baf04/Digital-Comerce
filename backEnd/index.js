@@ -9,13 +9,7 @@ const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
 app.use(express.json());
-app.use(cors(
-    {
-    origin: ["https://deploy-mern-1whq.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
-    }
-));
+app.use(cors());
 
 // Database conection mongoDB
 mongoose.connect("mongodb+srv://bruno:mongodb101@spa.9bxm8zz.mongodb.net/spa");
@@ -64,6 +58,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    real: {
+        type: Number,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
@@ -90,6 +88,7 @@ app.post('/addproduct', async (req, res) => {
             image: req.body.image,
             category: req.body.category,
             price: req.body.price,
+            real: req.body.real,
             description: req.body.description,
         });
         console.log(newProduct);
@@ -148,6 +147,9 @@ const Users = mongoose.model('Users',{
     points:{
         type:Number,
     },
+    history:{
+        type:Object,
+    },
 
 })
 
@@ -159,9 +161,9 @@ app.post('/signup', async (req, res) => {
         return res.status(400).json({ success: false, errors: "Existing User Found with the same email Address" });
     }
     
-    let cart = {};
+    let history = {};
     for (let i = 0; i < 1200; i++) {
-        cart[i] = 0;
+        history[i] = 0;
     }
     
     const user = new Users({
@@ -169,6 +171,7 @@ app.post('/signup', async (req, res) => {
         email: req.body.email,
         password: req.body.password,
         points: 500,     
+        history: history,
     });
 
     try {
@@ -231,11 +234,7 @@ const fetchUser = async (req,res,next) => {
 }
 
 //mecanismos de filtrado
-//apartados explicando funcionalidaes about us
-// enviar correo electronico contactanos
-// hostear
-// historial de comprar
-// que los productos generen 10% del valor real
+// enviar correo electronico contactanos 
 
 // endpoint for updating coins
 
@@ -264,6 +263,32 @@ app.post('/updatepoints', async (req, res) => {
         console.error(error);
         res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
+});
+
+// endpoint for adding to history
+
+app.post('/addtohistory', fetchUser, async (req, res) => {
+    try {
+        const { history } = req.body; 
+        await Users.findOneAndUpdate(
+            { _id: req.user.id },
+            { $push: { history: history } },
+            { new: true }
+        );
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error adding to purchase history:', error);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
+});
+
+
+// endpoint for getting history
+
+app.post('/gethistory', fetchUser, async (req, res) => {
+    let userData = await Users.findOne({_id:req.user.id});
+    res.json(userData.history);
 });
 
 // endpoint for getting points

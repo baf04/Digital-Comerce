@@ -1,0 +1,45 @@
+.purchase-history {
+    background: linear-gradient(to bottom, #fce3fe, #ffffff);
+    padding: 20px;
+}
+
+.purchasehistory-indexsort {
+    display: flex;
+    margin: 0 170px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.purchasehistory-sort {
+    padding: 10px 20px;
+    border-radius: 40px;
+    border: 1px solid #888;
+}
+
+.purchasehistory-indexsort p span {
+    font-weight: 600;
+}
+
+.purchasehistory-products {
+    margin: 20px 170px;
+}
+
+.purchase-history-entry {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.purchase-history-entry h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.purchase-history-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}

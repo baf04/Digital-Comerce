@@ -10,6 +10,7 @@ const Addproduct = () => {
         "image": "",
         "category": "material",
         "price": 0,
+        "real": 0, 
         "description": ""
     });
 
@@ -72,6 +73,10 @@ const Addproduct = () => {
                 <div className="addproduct-itemfield">
                     <p>Product Points</p>
                     <input value={productDetails.price} onChange={changeHandler} type="text" name="price" placeholder="Type Here" />
+                </div>
+                <div className="addproduct-itemfield">
+                    <p>Product Real Price</p>
+                    <input value={productDetails.real} onChange={changeHandler} type="text" name="real" placeholder="Type Here" />
                 </div>
             </div>
             <div className="addproduct-itemfield">
