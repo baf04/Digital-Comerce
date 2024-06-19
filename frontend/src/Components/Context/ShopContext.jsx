@@ -37,6 +37,7 @@ const ShopContextProvider = (props) => {
                 return {
                     id: itemId,
                     name: itemInfo.name,
+                    image: itemInfo.image,  
                     quantity,
                     price: itemInfo.price,
                     total: itemInfo.price * quantity,
@@ -63,8 +64,8 @@ const ShopContextProvider = (props) => {
     
             if (data.success) {
                 toast.success('Purchase history updated', { position: "bottom-right" });
-                setPurchaseHistory(prev => [...prev, newPurchase]); 
-                setCartItems(getDefaultCart()); 
+                setPurchaseHistory(prev => [...prev, newPurchase]);
+                setCartItems(getDefaultCart());
             } else {
                 toast.error('Failed to update purchase history', { position: "bottom-right" });
             }
@@ -73,6 +74,7 @@ const ShopContextProvider = (props) => {
             toast.error('Error updating purchase history', { position: "bottom-right" });
         }
     };
+    
     
     
     const removeFromCart = (itemId) => {

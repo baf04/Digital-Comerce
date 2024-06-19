@@ -39,3 +39,22 @@
     font-size: 18px;
     font-weight: 500;
 }
+
+
+.search-input {
+    padding: 10px 20px;
+    border-radius: 40px;
+    border: 1px solid #888;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0;
+}
+
+
+.shopcategory-products p {
+    color: #787878;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    grid-column: span 4; 
+}

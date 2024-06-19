@@ -47,7 +47,7 @@ const Navbar = () => {
                 {localStorage.getItem('auth-token') ? (
                     <>
                         <button onClick={handleLogout}>Logout from {username}</button>
-                        <div className='nav-points'>{userPoints}</div> 
+                        <div className='nav-points'>{userPoints} Points</div> 
                     </>
                 ) : (
                     <Link to='/login'><button>Login</button></Link>

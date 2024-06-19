@@ -49,6 +49,11 @@ const CartItems = () => {
         const totalAmount = getTotalCartAmount();
         const updatedPoints = userPoints - totalAmount;
 
+        if (!localStorage.getItem('auth-token')) {
+            toast.error('You must be logged in to purchase with points');
+            return;
+        }
+
         if (totalAmount === 0) {
             toast.error('Your cart is empty');
             return;

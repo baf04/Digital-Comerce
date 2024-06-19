@@ -1,19 +1,12 @@
 import React from "react";
-import teamImage from "../Components/Assets/logo.png";
-import backgroundImage from "../Components/Assets/logo.png"; // Ruta de la imagen de fondo
+import teamImage from "../Components/Assets/Untitled design.png";
+import backgroundImage from "../Components/Assets/logo.png"; 
 import "./CSS/About.css";
 
 const About = () => {
-  const backgroundStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "33.33vh", // Ocupa un tercio del contenedor
-  };
 
   return (
     <div className="about-container">
-      <div style={backgroundStyle} />
       <div className="about-content-wrapper">
         <div className="about-header">
           <h1>About Us</h1>

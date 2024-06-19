@@ -7,12 +7,12 @@
     justify-content: center;
     align-items: flex-start;
     padding-top: 20px;
-    padding-bottom: 300px; 
+    padding-bottom: 500px; 
   }
   
   .about-content-wrapper {
     width: 80%;
-    max-width: 800px;
+    max-width: 1200px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -65,6 +65,7 @@
     display: block;
     margin: 0 auto; 
     max-width: 100%;
+    transform: scale(0.70);
     height: auto;
     border-radius: 10px;
     margin-bottom: 20px;
